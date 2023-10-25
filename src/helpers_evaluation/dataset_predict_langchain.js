@@ -16,7 +16,7 @@ import { HumanMessage, SystemMessage } from "langchain/schema";
 
 // local imports
 import Utils from "../utils.js";
-import ModelPathContants from "../../vendor/llama_playground/model_path_constants.js";
+import ModelPathContants from "../../vendor/llama_playground/src/model_path_constants.js";
 
 // get __dirname in esm module
 import Url from "url";
@@ -93,7 +93,7 @@ Based on this context, answer the following question:
 			temperature: 0,
 			verbose: options.verbose,
 		});
-		// const modelPath = Path.join(__dirname, '../../../../models', ModelPathContants.MISTRAL_7B_INSTRUCT_V0_1_Q6_K)
+		// const modelPath = Path.join(__dirname, '../../vendor/llama_playground/models', ModelPathContants.MISTRAL_7B_INSTRUCT_V0_1_Q6_K)
 		// const modelName = Path.basename(modelPath)
 		// const lgModel = new LlamaCpp({ modelPath });
 

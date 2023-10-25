@@ -50,11 +50,12 @@ async function mainAsync() {
 
 	// parse command line
 	const cmdline = new Commander.Command()
-	cmdline.name('dataset_evaluation.js')
+	cmdline.name('llamacpp_evaluation.js')
 		.version('0.0.3')
-		.description(`dataset_evaluation.js - perform all evaluations on a named dataset
+		.description(`llamacpp_evaluation.js - perform all evaluations operations
 
 Some functions are available in 2 technologies: langchain and direct.
+Some evaluations operations will ask you for a OPENAPI keys. export it as OPENAI_API_KEY environment variable.
         
 About Model Names: When using langchain, the model name is something like "gpt-4" or "gpt-3.5-turbo".
 When using direct node-llama-cpp, the model name is something like "codellama-13b-instruct.Q2_K.gguf" or 

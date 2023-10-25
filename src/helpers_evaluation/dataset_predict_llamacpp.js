@@ -90,7 +90,7 @@ Based on this context, answer the following question:
 		///////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////
 
-		const modelPath = Path.join(__dirname, '../../../../models', options.modelName)
+		const modelPath = Path.join(__dirname, '../../vendor/llama_playground/models', options.modelName)
 		const { llamaContext, llamaModel } = await LlamaUtils.initModelAndContext(modelPath)
 
 		///////////////////////////////////////////////////////////////////////////////

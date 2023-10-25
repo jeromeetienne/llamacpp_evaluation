@@ -114,7 +114,7 @@ Now based on this context, generate ${options.recordCount !== 0 ? options.record
 		///////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////
 
-		const modelPath = Path.join(__dirname, '../../../../models', options.modelName)
+		const modelPath = Path.join(__dirname, '../../vendor/llama_playground/models', options.modelName)
 		const { llamaContext } = await LlamaUtils.initModelAndContext(modelPath)
 
 		///////////////////////////////////////////////////////////////////////////////

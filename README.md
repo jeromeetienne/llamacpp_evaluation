@@ -7,7 +7,7 @@
   - langchain.js support for llamacpp is not perfect, but it is so rich
 - [ ] What are the limits of langchain.js's support for llamacpp
 
-## Langchain.js support status
+## Langchain.js support status of llama_cpp
 - langchain's LLamaCpp doesn't support grammar
   - the json grammar is a **KEY** feature of llamacpp, improving quality of structured output
   - **NOTE** Q. could we improve langchain support ? it got the concept in [DynamicStructuredTool](https://js.langchain.com/docs/modules/agents/agent_types/structured_chat)
@@ -61,6 +61,36 @@ Commands:
 
 ## How to do an Evaluation ? (with hyper parameter tuning)
 
+### Command Line Help
+
+```sh
+Usage: llamacpp_evaluation.js [options] [command]
+
+llamacpp_evaluation.js - perform all evaluations operations
+
+Some functions are available in 2 technologies: langchain and direct.
+Some evaluations operations will ask you for a OPENAPI keys. export it as OPENAI_API_KEY environment variable.
+        
+About Model Names: When using langchain, the model name is something like "gpt-4" or "gpt-3.5-turbo".
+When using direct node-llama-cpp, the model name is something like "codellama-13b-instruct.Q2_K.gguf" or 
+"mistral-7b-instruct-v0.1.Q6_K.gguf". Typically this is the basename of the files stored in "models" folder.
+
+
+Options:
+  -V, --version                                                       output the version number
+  -h, --help                                                          display help for command
+
+Commands:
+  create <evaluationName> <datasetPath> <hpTuningPath>                generate an evaluation from a dataset and a hpTuning file.
+  delete <evaluationName>                                             delete an evaluation. WARNING: this is irreversible.
+  predictOne [options] <evaluationName> <predictionName> [modelName]  predict on the dataset
+  evaluateOne <evaluationName> <predictionName>                       evaluate the prediction based on the dataset
+  report <evaluationName>                                             Print a report on the dataset evaluation
+  compute <evaluationName>                                            Do hyperparameters tuning for a given .hptuning.json file
+  help [command]                                                      display help for command
+```
+
+### Steps 
 Create a dataset
 ```sh
 ./bin/llamacpp_evaluations.js dataset translateFrench

@@ -463,7 +463,7 @@ in life's simple pleasures.`
 
 			const isLlamaCppModel = tuningPredictionJson.modelName.endsWith('.gguf')
 			if (isLlamaCppModel) {
-				const filePath = Path.join(__dirname, `../../../models/${tuningPredictionJson.modelName}`)
+				const filePath = Path.join(__dirname, `../vendor/llama_playground/models/${tuningPredictionJson.modelName}`)
 				const fileExists = await FsExtra.pathExists(filePath)
 				if (fileExists === true) continue
 			}

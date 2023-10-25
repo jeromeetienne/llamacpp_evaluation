@@ -134,11 +134,11 @@ async function mainAsync() {
 					console.log(`- ${CliColor.bold(gridSearchInfo.gridSearchName)}: ${gridSearchInfo.description}`)
 				}
 			} else if (gridSearchName === 'translateFrench') {
-				await generateGridSearchTranslateFrench(`gridsearch_${gridSearchName}}`)
+				await generateGridSearchTranslateFrench(`gridsearch_${gridSearchName}`)
 			} else if (gridSearchName === 'onlyBlah') {
-				await generateGridSearchOnlyBlah(`gridsearch_${gridSearchName}}`)
+				await generateGridSearchOnlyBlah(`gridsearch_${gridSearchName}`)
 			} else if (gridSearchName === 'testAccuracy') {
-				await generateGridSearchTestAccuracy(`gridsearch_${gridSearchName}}`)
+				await generateGridSearchTestAccuracy(`gridsearch_${gridSearchName}`)
 			} else {
 				console.error(CliColor.red(`unknown gridSearchName : ${gridSearchName}`))
 				process.exit(1)

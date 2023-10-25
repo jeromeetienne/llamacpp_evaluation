@@ -14,9 +14,9 @@ import { zodToJsonSchema } from "zod-to-json-schema";
 import Json5 from "json5";
 
 // local imports
-import LlamaUtils from "../../../../src/llama-utils.js";
+import LlamaUtils from "../../vendor/llama_playground/src/llama-utils.js";
 import Utils from "../utils.js";
-import ModelPathContants from "../../../../src/model_path_constants.js";
+import ModelPathContants from "../../vendor/llama_playground/src/model_path_constants.js";
 
 // get __dirname in esm module
 import Url from "url";

@@ -2,7 +2,7 @@
 import Zod from "zod";
 
 // local imports
-import ModelPathContants from "../../../src/model_path_constants.js";
+import ModelPathContants from "../vendor/llama_playground/src/model_path_constants.js";
 import RecordGenerateLlamaCpp from "../src/helpers_generation/record_generate_llamacpp.js";
 import RecordGenerateLangchain from "../src/helpers_generation/record_generate_langchain.js";
 

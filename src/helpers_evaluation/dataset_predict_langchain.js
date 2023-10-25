@@ -16,7 +16,7 @@ import { HumanMessage, SystemMessage } from "langchain/schema";
 
 // local imports
 import Utils from "../utils.js";
-import ModelPathContants from "../../../../src/model_path_constants.js";
+import ModelPathContants from "../../vendor/llama_playground/model_path_constants.js";
 
 // get __dirname in esm module
 import Url from "url";

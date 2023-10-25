@@ -61,6 +61,16 @@ Commands:
 
 ## How to do an Evaluation ? (with hyper parameter tuning)
 
+Create a dataset
+```sh
+./bin/llamacpp_evaluations.js dataset translateFrench
+```
+
+Create a gridsearch and hp tuning
+```sh
+./bin/synthetic_data_generator.js gridsearch translateFrench
+```
+
 Create an evaluation
 ```sh
 ./bin/llamacpp_evaluation.js create translareFrenchEval ./data/datasets/translateFrench.dataset.json ./data/hptunings/gridsearch_translateFrench.hptuning.json

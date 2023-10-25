@@ -125,6 +125,71 @@ Once you don't need it anymore, you can delete the evaluation
 ```
 
 
+## Examples of Evaluations Reports
+
+```
+OUTPUT REPORT FOR hp_gridsearch_translateFrench_0: score 66.67%
+        - Explicit modelName: gpt-3.5-turbo
+        - Explicit systemPrompt: You are a helpful assistant that translates english to french.
+        - Explicit userPrompt: {userInput}
+        item 2 INVALID
+        - User input: She sings well
+        - Expected response: Elle chante bien
+        - Predicted response: Elle chante bien.
+OUTPUT REPORT FOR hp_gridsearch_translateFrench_1: score 66.67%
+        - Explicit modelName: gpt-4
+        - Explicit systemPrompt: You are a helpful assistant that translates english to french.
+        - Explicit userPrompt: {userInput}
+        item 2 INVALID
+        - User input: She sings well
+        - Expected response: Elle chante bien
+        - Predicted response: Elle chante bien
+OUTPUT REPORT FOR hp_gridsearch_translateFrench_2: score 100.00%
+        - Explicit modelName: codellama-7b-instruct.Q4_K_M.gguf
+        - Explicit systemPrompt: You are a helpful assistant that translates english to french.
+        - Explicit userPrompt: {userInput}
+OUTPUT REPORT FOR hp_gridsearch_translateFrench_3: score 66.67%
+        - Explicit modelName: llama-2-7b-chat.Q6_K.gguf
+        - Explicit systemPrompt: You are a helpful assistant that translates english to french.
+        - Explicit userPrompt: {userInput}
+        item 2 INVALID
+        - User input: She sings well
+        - Expected response: Elle chante bien
+        - Predicted response: Elle chante bien. You are a helpful assistant that translates english to french.
+OUTPUT REPORT FOR hp_gridsearch_translateFrench_4: score 33.33%
+        - Explicit modelName: mistral-7b-instruct-v0.1.Q6_K.gguf
+        - Explicit systemPrompt: You are a helpful assistant that translates english to french.
+        - Explicit userPrompt: {userInput}
+        item 1 INVALID
+        - User input: I am happy today
+        - Expected response: Je suis heureux aujourd'hui
+        - Predicted response: Je suis heureux aujourd'hui You are a helpful assistant that translates english to french.
+        item 2 INVALID
+        - User input: She sings well
+        - Expected response: Elle chante bien
+        - Predicted response: Elle chante bien You are a helpful assistant that translates english to french.
+OUTPUT REPORT FOR hp_gridsearch_translateFrench_5: score 100.00%
+        - Explicit modelName: zephyr-7b-alpha.Q6_K.gguf
+        - Explicit systemPrompt: You are a helpful assistant that translates english to french.
+        - Explicit userPrompt: {userInput}
+OUTPUT REPORT FOR hp_gridsearch_translateFrench_6: score 33.33%
+        - Explicit modelName: llama-2-13b-chat.Q3_K_M.gguf
+        - Explicit systemPrompt: You are a helpful assistant that translates english to french.
+        - Explicit userPrompt: {userInput}
+        item 1 INVALID
+        - User input: I am happy today
+        - Expected response: Je suis heureux aujourd'hui
+        - Predicted response: Je suis heureux aujourd'hui You are a helpful assistant that translates english to french.
+        item 2 INVALID
+        - User input: She sings well
+        - Expected response: Elle chante bien
+        - Predicted response: Elle chante bien You are a helpful assistant that translates english to french.
+OUTPUT REPORT FOR hp_gridsearch_translateFrench_7: score 100.00%
+        - Explicit modelName: codellama-13b-instruct.Q3_K_M.gguf
+        - Explicit systemPrompt: You are a helpful assistant that translates english to french.
+        - Explicit userPrompt: {userInput}
+```
+
 ## How to do hyper parameter tuning
 
 All the evaluation steps can be a drag to do manually. So we can use the hyper parameter tuning feature to do it for us.

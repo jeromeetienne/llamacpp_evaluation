@@ -6,7 +6,8 @@
     "llama_cpp_evaluation": "bin/llama_cpp_evaluation.js"
   },
   "scripts": {
-    "preinstall": "git submodule update --init --recursive",
+    "preinstall": "git submodule update --init --recursive && npm run llama_playground:install",
+    "llama_playground:install": "cd ./vendor/llama_playground/ && npm install",
     "evaluation": "node ./bin/llama_cpp_evaluation.js",
     "generate": "node ./bin/llama_cpp_evaluation.js generate myEval",
     "predict": "node ./bin/llama_cpp_evaluation.js predict myEval myPredict",

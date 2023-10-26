@@ -90,7 +90,7 @@ Commands:
   help [command]                                                      display help for command
 ```
 
-### Steps 
+### Evaluation Steps 
 Create a dataset
 ```sh
 ./bin/llamacpp_evaluations.js dataset translateFrench
@@ -101,24 +101,22 @@ Create a gridsearch and hp tuning
 ./bin/synthetic_data_generator.js gridsearch translateFrench
 ```
 
-Create an evaluation
+Create an evaluation.
 ```sh
 ./bin/llamacpp_evaluation.js create translareFrenchEval ./data/datasets/translateFrench.dataset.json ./data/hptunings/gridsearch_translateFrench.hptuning.json
 ```
 
-Compute the evaluation
-
+Compute the evaluation.
 ```sh
 ./bin/llamacpp_evaluation.js compute translareFrenchEval 
 ```
 
-Display the evaluation report
-
+Display the evaluation report.
 ```sh
 ./bin/llamacpp_evaluation.js report translareFrenchEval 
 ```
 
-Once you don't need it anymore, you can delete the evaluation
+Once you don't need the evaluation anymore, you can delete it.
 
 ```sh
 ./bin/llamacpp_evaluation.js delete translareFrenchEval 

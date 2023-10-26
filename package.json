@@ -6,6 +6,7 @@
     "llama_cpp_evaluation": "bin/llama_cpp_evaluation.js"
   },
   "scripts": {
+    "preinstall": "git submodule update --init --recursive",
     "evaluation": "node ./bin/llama_cpp_evaluation.js",
     "generate": "node ./bin/llama_cpp_evaluation.js generate myEval",
     "predict": "node ./bin/llama_cpp_evaluation.js predict myEval myPredict",

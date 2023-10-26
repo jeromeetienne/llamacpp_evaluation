@@ -20,6 +20,15 @@ Install the dependencies
 npm install
 ```
 
+## Dependancies
+
+Depend on [llama_playground](https://github.com/jeromeetienne/llamacpp_playground) as git submodules dependancies.
+```npm install``` should install it for you, but if it doesn't, you can do it manually with.
+
+```sh
+git submodule update --init --recursive
+```
+
 ## How to test
 
 It test all .json files are conforming to their json-schema.

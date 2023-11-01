@@ -3,8 +3,8 @@ import Zod from "zod";
 
 // local imports
 import ModelPathContants from "../vendor/llama_playground/src/model_path_constants.js";
-import RecordGenerateLlamaCpp from "../src/helpers_generation/record_generate_llamacpp.js";
-import RecordGenerateLangchain from "../src/helpers_generation/record_generate_langchain.js";
+import RecordGenerateLlamaCpp from "../src/records_generator/record_generate_llamacpp.js";
+import RecordGenerateLangchain from "../src/records_generator/record_generate_langchain.js";
 
 
 // create record zod schema
@@ -14,27 +14,22 @@ const recordZodSchema = Zod.object({
         happyNess: Zod.number().nullable().describe('the sadness/happiness of this person. integer from 0 to 10 inclusive. null if not specified'),
 })
 
-// const recordZodSchema = Zod.object({
-//         summary: Zod.string().describe('the summary of the context'),
-// })
-
 // load the context we want to use
 const context = `hello my name is John, my last name is Doe. I am 30 years old.
 my friend is called Jane, her last name is Smith. she is 25 years old and not happy.
 the other day, i met Bill Gates, he was laughing.`
 
-
 // generate the records
 let recordsJson = /** @type {array} */([])
 const useLlamaCpp = true
 if (useLlamaCpp) {
-        recordsJson = await RecordGenerateLlamaCpp.generateRecordsFromZod(recordZodSchema, {
+        recordsJson = await RecordGenerateLlamaCpp.generateFromZod(recordZodSchema, {
                 recordCount: 0,
                 context: context,
-                // modelName: ModelPathContants.LLAMA_2_13B_CHAT_Q3_K_M,
+                modelName: ModelPathContants.LLAMA_2_13B_CHAT_Q3_K_M,
         })
 } else {
-        recordsJson = await RecordGenerateLangchain.generateRecordsFromZod(recordZodSchema, {
+        recordsJson = await RecordGenerateLangchain.generateFromZod(recordZodSchema, {
                 recordCount: 0,
                 context: context,
                 modelName: 'gpt-3.5-turbo',

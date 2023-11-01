@@ -135,12 +135,14 @@ async function mainAsync() {
 		question: Zod.string().describe('a short clear question based on the context'),
 		answer: Zod.string().describe('the response to the question'),
 	})
-	// load the context we want to use
-	const recordJson = await RecordGenerateLangchain.generateFromZod(recordZodSchema, {
+	// generate the records
+	const recordsJson = await RecordGenerateLangchain.generateFromZod(recordZodSchema, {
 		recordCount: 3,
 		context: await Utils.loadContextStateUnion(),
 	})
-	console.log({ recordJson })
+
+	// display the result
+	console.log({ recordJson: recordsJson })
 
 }
 

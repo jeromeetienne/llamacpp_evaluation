@@ -4,18 +4,14 @@
 
 // node imports
 import Path from "path";
-import Fs from 'fs'
 
 // npm imports
-import { LlamaModel, LlamaContext, LlamaChatSession, LlamaGrammar, LlamaJsonSchemaGrammar, LlamaChatPromptWrapper } from "node-llama-cpp";
-import CliColor from "cli-color";
+import { LlamaJsonSchemaGrammar } from "node-llama-cpp";
 import Zod from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
-import Json5 from "json5";
 
 // local imports
 import LlamaUtils from "../../vendor/llama_playground/src/llama-utils.js";
-import Utils from "../utils.js";
 import ModelPathContants from "../../vendor/llama_playground/src/model_path_constants.js";
 
 // get __dirname in esm module
@@ -122,13 +118,14 @@ Now based on this context, generate ${options.recordCount !== 0 ? options.record
 		//	
 		///////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////
+		let responseJsonUntyped = await LlamaUtils.promptGrammarJsonOne(llamaContext, llamaGrammar, systemPrompt, userPrompt, true)
 
-		const responseJson = await LlamaUtils.promptGrammarJsonOne(llamaContext, llamaGrammar, systemPrompt, userPrompt, true)
+		// reparse with zod to validate the responseJsonUntyped and to do type casting if needed
+		// - result is garanteed to be typed
+		const responseJsonTyped = responseZodSchema.parse(responseJsonUntyped)
 
-		// TODO reparse with zod to validate the responseJson
-
-		// debugger
-		return responseJson
+		// return the response
+		return responseJsonTyped
 	}
 }
 
@@ -145,20 +142,21 @@ async function mainAsync() {
 		age: Zod.number().nullable().describe('the age of this person. null if not specified'),
 		happyNess: Zod.number().nullable().describe('the sadness/happiness of this person. integer from 0 to 10 inclusive. null if not specified'),
 	})
-	// const recordZodSchema = Zod.object({
-	// 	summary: Zod.string().describe('the summary of the context'),
-	// })
+
 	// load the context we want to use
 	const context = `hello my name is John, my last name is Doe. I am 30 years old.
 my friend is called Jane, her last name is Smith. she is 25 years old and not happy.
 the other day, i met Bill Gates, he was laughing.`
 
-	const recordJson = await RecordGenerateLlamaCpp.generateFromZod(recordZodSchema, {
+	// generate the records
+	const recordsJson = await RecordGenerateLlamaCpp.generateFromZod(recordZodSchema, {
 		recordCount: 1,
 		context: context,
 		modelName: ModelPathContants.LLAMA_2_13B_CHAT_Q3_K_M,
 	})
-	console.log({ recordJson })
+
+	// display the records
+	console.log({ recordJson: recordsJson })
 }
 
 // run mainAsync() if this file is run directly from node.js

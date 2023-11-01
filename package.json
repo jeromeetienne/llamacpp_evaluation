@@ -16,7 +16,13 @@
     "hptuning": "node ./bin/llama_cpp_evaluation.js hptuning myEval ./data/evaluations/hptunings/superHpTuning.hptuning.json5",
     "test": "cd test && npm test"
   },
-  "keywords": ["llamacpp", "evaluation", "machine learning", "ml", "ai"],
+  "keywords": [
+    "llamacpp",
+    "evaluation",
+    "machine learning",
+    "ml",
+    "ai"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -26,7 +32,7 @@
     "fs-extra": "^11.1.1",
     "json5": "^2.2.3",
     "langchain": "^0.0.172",
-    "node-llama-cpp": "^2.7.3",
+    "node-llama-cpp": "^2.7.4",
     "zod": "^3.22.4",
     "zod-to-json-schema": "^3.21.4"
   }

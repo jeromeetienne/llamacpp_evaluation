@@ -73,6 +73,7 @@ export default class RecordGenerateLlamaCpp {
 		})
 		formatInstruction = formatInstruction.trim()
 
+		// TODO change that for f-string template
 		const systemPrompt = `Generate JSON Objects. each of them has:
 ${formatInstruction}
 
@@ -118,6 +119,8 @@ Now based on this context, generate ${options.recordCount !== 0 ? options.record
 		//	
 		///////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////
+
+		// @ts-ignore
 		let responseJsonUntyped = await LlamaUtils.promptGrammarJsonOne(llamaContext, llamaGrammar, systemPrompt, userPrompt, true)
 
 		// reparse with zod to validate the responseJsonUntyped and to do type casting if needed

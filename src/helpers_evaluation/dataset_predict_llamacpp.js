@@ -120,7 +120,7 @@ Based on this context, answer the following question:
 		const predictionJson = /** @type {import("../type.d.js").PredictionJson} */([])
 
 		for (const datasetItem of datasetJson) {
-			const userPromptGenerated = userPromptTemplate.generate({
+			const userPromptGenerated = userPromptTemplate.format({
 				context: contextText,
 				userInput: datasetItem.userInput
 			})

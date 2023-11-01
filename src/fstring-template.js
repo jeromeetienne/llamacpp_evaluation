@@ -11,7 +11,7 @@ export default class FstringTemplate {
          * 
          * @param {Object<String, any>} parameters 
          */
-        generate(parameters) {
+        format(parameters) {
                 const renderedTemplate = FstringTemplate.render(this._templateText, parameters)
                 return renderedTemplate
         }
@@ -55,7 +55,7 @@ CONTEXT_END
 Based on this context, answer the following question:
 {question}`
         const fstringTemplate = new FstringTemplate(templateText)
-        const renderedTemplate = fstringTemplate.generate({
+        const renderedTemplate = fstringTemplate.format({
                 context: "my name is john.",
                 question: 'What is your name?'
         })

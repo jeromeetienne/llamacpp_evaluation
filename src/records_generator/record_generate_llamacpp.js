@@ -40,6 +40,12 @@ export default class RecordGenerateLlamaCpp {
 		context: '',
 	})
 
+	///////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////
+	//	
+	///////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * @param {Zod.Schema} recordZodSchema 
 	 * @param {Partial<RecordGenerateLlamaCppOptions>} partialOptions
@@ -57,21 +63,23 @@ export default class RecordGenerateLlamaCpp {
 		///////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////
 
-		// convert zodSchema to jsonSchema
-		let recordJsonSchemaTyped = zodToJsonSchema(recordZodSchema)
-		let recordJsonSchema = /** @type {object} */(JSON.parse(JSON.stringify(recordJsonSchemaTyped)))
-		// 
-		const fixtureProperties = /** @type {Object<string, string>} */({})
-		Object.keys(recordJsonSchema.properties).forEach(property => {
-			fixtureProperties[property] = recordJsonSchema.properties[property].description
-		})
+		// // convert zodSchema to jsonSchema
+		// let recordJsonSchemaTyped = zodToJsonSchema(recordZodSchema)
+		// let recordJsonSchema = /** @type {object} */(JSON.parse(JSON.stringify(recordJsonSchemaTyped)))
+		// // 
+		// const fixtureProperties = /** @type {Object<string, string>} */({})
+		// Object.keys(recordJsonSchema.properties).forEach(property => {
+		// 	fixtureProperties[property] = recordJsonSchema.properties[property].description
+		// })
 
-		// format the instructions
-		let formatInstruction = ''
-		Object.keys(fixtureProperties).forEach(property => {
-			formatInstruction += `- ${property}: <${fixtureProperties[property].toUpperCase()}>\n`
-		})
-		formatInstruction = formatInstruction.trim()
+		// // format the instructions
+		// let formatInstruction = ''
+		// Object.keys(fixtureProperties).forEach(property => {
+		// 	formatInstruction += `- ${property}: <${fixtureProperties[property].toUpperCase()}>\n`
+		// })
+		// formatInstruction = formatInstruction.trim()
+
+		const formatInstruction = await RecordGenerateLlamaCpp.formatInstructionFromZod(recordZodSchema)
 
 		// TODO change that for f-string template
 		const systemPrompt = `Generate JSON Objects. each of them has:
@@ -129,6 +137,30 @@ Now based on this context, generate ${options.recordCount !== 0 ? options.record
 
 		// return the response
 		return responseJsonTyped
+	}
+
+	/**
+	 * 
+	 * @param {Zod.Schema} recordZodSchema 
+	 * @returns 
+	 */
+	static async formatInstructionFromZod(recordZodSchema) {
+		// convert zodSchema to jsonSchema
+		let recordJsonSchemaTyped = zodToJsonSchema(recordZodSchema)
+		let recordJsonSchema = /** @type {object} */(JSON.parse(JSON.stringify(recordJsonSchemaTyped)))
+		// 
+		const fixtureProperties = /** @type {Object<string, string>} */({})
+		Object.keys(recordJsonSchema.properties).forEach(property => {
+			fixtureProperties[property] = recordJsonSchema.properties[property].description
+		})
+
+		// format the instructions
+		let formatInstruction = ''
+		Object.keys(fixtureProperties).forEach(property => {
+			formatInstruction += `- ${property}: <${fixtureProperties[property].toUpperCase()}>\n`
+		})
+		formatInstruction = formatInstruction.trim()
+		return formatInstruction
 	}
 }
 

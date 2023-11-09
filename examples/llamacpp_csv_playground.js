@@ -31,6 +31,36 @@ const __dirname = Path.dirname(__filename);
 
 async function mainAsync() {
 
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////
+        //	Parse command line
+        /////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////
+
+        // parse command line
+        const cmdline = new Commander.Command()
+        cmdline.name(`${Path.basename(__filename)}`)
+                .version('0.0.3')
+                .description(`Play with CSV files and LlamaCpp models.`)
+        // cmdline.usage('[options]')
+        cmdline.option('-f, --file <filename>', 'Generate new rows for a CSV table.')
+        cmdline.option('-a, --analyse', 'Perform an analysis of the CSV file.')
+        cmdline.option('--fixture-generation-zero-shot', 'Generate new rows for a CSV table.')
+        cmdline.option('--table-description-zero-shot', 'Generate a description for a CSV table.')
+        cmdline.option('--column-description-zero-shot', 'Generate a description for each column of a CSV table.')
+        cmdline.option('--column-renaming-zero-shot', 'Suggest renaming columns of a CSV table.')
+
+        ///////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////
+        //	parse command line
+        ///////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////
+
+        // parse command line
+        cmdline.parse(process.argv)
+        const cmdlineOptions = cmdline.opts()
+
         ///////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////
         //	init llamaModel and llamaContext
@@ -58,45 +88,23 @@ async function mainAsync() {
 2004,Toyota,Corolla,2.52
 1998,Volkswagen,Golf,2.55
 2006,Honda,Civic,2.58`
-
-        /////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////
-        //	Parse command line
-        /////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////
-
-        // parse command line
-        const cmdline = new Commander.Command()
-        cmdline.name(`${Path.basename(__filename)}`)
-                .version('0.0.3')
-                .description(`Play with CSV files and LlamaCpp models.`)
-        // cmdline.usage('[options]')
-        cmdline.option('-f, --file <filename>', 'Generate new rows for a CSV table.')
-        cmdline.option('--fixture-generation-zero-shot', 'Generate new rows for a CSV table.')
-        cmdline.option('--table-description-zero-shot', 'Generate a description for a CSV table.')
-        cmdline.option('--column-description-zero-shot', 'Generate a description for each column of a CSV table.')
-        cmdline.option('--column-renaming-zero-shot', 'Suggest renaming columns of a CSV table.')
-
-        ///////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////
-        //	parse command line
-        ///////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////
-
-        // parse command line
-        cmdline.parse(process.argv)
-        const cmdlineOptions = cmdline.opts()
-
+        let csvContent = csvContentDefault
         ///////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////
         //	process command line options
         ///////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////
 
-        let csvContent = csvContentDefault
-        if( cmdlineOptions.file ) {
+
+        if (cmdlineOptions.file) {
                 const fileContent = await Fs.promises.readFile(cmdlineOptions.file, 'utf8')
                 csvContent = fileContent
+        }
+
+        if (cmdlineOptions.analyse) {
+                cmdlineOptions.tableDescriptionZeroShot = true
+                cmdlineOptions.columnDescriptionZeroShot = true
+                cmdlineOptions.columnRenamingZeroShot = true
         }
 
         if (cmdlineOptions.fixtureGenerationZeroShot) {
